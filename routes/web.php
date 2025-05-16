@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,8 @@ Route:: get ('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route:: get ('/about-us', [FrontendController::class, 'aboutUs']);
 Route:: get ('/contact-us', [FrontendController::class, 'contactUs']);
 
-
+//aurthController
+Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
 
 Auth::routes();
 
