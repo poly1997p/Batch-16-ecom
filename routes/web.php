@@ -40,6 +40,8 @@ Route:: get ('/contact-us', [FrontendController::class, 'contactUs']);
 //aurthController
 Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
 
+Route::get('/admin/logout', [AdminAuthController::class, 'logoutAdmin']);
+
 Auth::routes();
 
 Route::get('/admin/dashboard', [AdminController::class, 'adminDsahboard']);
