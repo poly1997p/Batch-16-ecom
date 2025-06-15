@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\SubCategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class SubCategoryController extends Controller
+{
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function subCategoryCreate(){
+
+        $categories = Category::all();
+
+      return view('backend.subcategory.create', compact('categories'));  
+    }
+
+    public function subCategoryStore( request $request){
+     
+        $subcategory = new SubCategory();
+
+        $subcategory->name = $request->name;
+        $subcategory->slug = str::slug( $request->name);
+        $subcategory->cat_id = $request->cat_id;
+
+        $subcategory->save();
+        return redirect()->back();
+    }
+
+    public function subCategoryList(){
+        $subcategories = SubCategory::all();
+        
+        return view('backend.subcategory.list', compact('subcategories'));
+    }
+}
