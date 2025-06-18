@@ -51,7 +51,7 @@
                                         <td>{{$loop->index+1}}</td>
                                         
                                         <td>{{$SubCategory->name}} </td>
-                                        <td>{{$SubCategory->cat_id}} </td>
+                                        <td>{{$SubCategory->category->name}} </td>
                                          
                                         
                                         <td>
