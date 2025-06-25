@@ -70,8 +70,8 @@ Route::post('/admin/sub-category/update/{id}', [SubCategoryController::class, 's
 //product routes....
 
 Route::get('/admin/product/create', [productController::class, 'productCreate']);
-Route::get('/admin/product/store', [productController::class, 'productStore']);
+Route::post('/admin/product/store', [productController::class, 'productStore']);
 Route::get('/admin/product/list', [productController::class, 'productList']);
 Route::get('/admin/product/delete/{id}', [productController::class, 'productDelete']);
 Route::get('/admin/product/edit/{id}', [productController::class, 'productEdit']);
-Route::get('/admin/product/Update/{id}', [productController::class, 'productUpdate']);
+Route::post('/admin/product/Update/{id}', [productController::class, 'productUpdate']);

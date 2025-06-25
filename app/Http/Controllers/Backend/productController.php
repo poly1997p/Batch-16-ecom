@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class productController extends Controller
 {
@@ -13,7 +18,37 @@ class productController extends Controller
     }
 
     public function productCreate(){
+        $categories = Category::orderBy('name', 'asc')->get();
+        $subCategories = SubCategory::orderBy('name', 'asc')->get();
+        
+        return view('backend.product.create', compact('categories', 'subCategories'));
+    }
 
-        return view('backend.product.create');
+    public function productStore(Request $request)
+    {
+      $product= new Product();
+
+      $product->name = $request->name;
+      $product->slug = Str::slug($request->name);
+      $product->cat_id = $request->cat_id;
+      $product->sab_cat_id = $request->sab_cat_id;
+      $product->sku_code = $request->sku_code;
+      $product->qty = $request->qty;
+      $product->regular_price = $request->regular_price;
+      $product->buying_price = $request->buying_price;
+      $product->discount_price = $request->discount_price;
+      $product->product_type = $request->product_type;
+      $product->description = $request->description;
+      $product->product_policy = $request->product_policy;
+
+       if (isset($request->image)) {
+         $imageName = rand() . '-product-' . '.' . $request->image->extension();
+         $request->image->move('backend/images/product/', $imageName);
+         $product->image = $imageName;
+
+      }
+
+      $product->save();
+      return redirect()->back();
     }
 }

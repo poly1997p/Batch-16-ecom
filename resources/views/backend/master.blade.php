@@ -28,6 +28,10 @@
     </div>
     <!--end::App Wrapper-->
    @include('backend.includes.script')
+
+   
+	@stack('script')
+  
   </body>
   <!--end::Body-->
 </html>
