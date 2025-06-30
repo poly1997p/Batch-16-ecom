@@ -1,7 +1,5 @@
 @extends('backend.master')
 
-@section('content')
-    <h1> create</h1>@extends('backend.master')
 
 @section('content')
     <!--begin::App Content Header-->
@@ -54,8 +52,8 @@
 
                                     <div class="col-6 mb-3">
                                         <label for="sku_code" class="form-label">Product Code*</label>
-                                        <input type="text" class="form-control" id="sku_code" name="sku_code"
-                                            required />
+                                        <input type="text" class="form-control" id="sku_code" name="sku_code" required />
+                                           
 
                                     </div>
 
@@ -71,14 +69,34 @@
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label for="sab_cat_id" class="form-label">Product SubCategory*</label>
-                                        <select class="form-control" name="sab_cat_id" id="sab_cat_id">
+                                        <label for="sub_cat_id" class="form-label">Product SubCategory*</label>
+                                        <select class="form-control" name="sub_cat_id" id="sub_cat_id">
                                             <option selected disabled>Select SubCategory*</option>
                                             @foreach ($subCategories as $subCategory)
                                                 <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
                                             @endforeach
 
                                         </select>
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <div class="form-group" id="colors_fields">
+                                          <label for="color_name" class="form-label">Product Color (Optional)</label>
+                                          <input type="text" class="form-control mb-2" id="color_name" name="color_name[]" value=""/>  
+                                        </div>
+                                        
+                                        <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>   
+
+                                    </div>
+
+                                     <div class="col-6 mb-3">
+                                        <div class="form-group" id="sizes_fields">
+                                          <label for="size_name" class="form-label">Product Size (Optional)</label>
+                                          <input type="text" class="form-control mb-2" id="size_name" name="size_name[]" value=""/>  
+                                        </div>
+                                        
+                                        <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>   
+
                                     </div>
 
                                     <div class="col-6 mb-3">
@@ -128,9 +146,15 @@
                                     </div>
 
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="" name="image"
-                                            required />
-                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                        <input type="file" class="form-control" accept="image/*" id="image" name="image" required />
+                                           
+                                        <label class="input-group-text" for="image">Upload Main Image</label>
+                                    </div>
+
+                                     <div class="input-group mb-3">
+                                        <input type="file" class="form-control" accept="image/*" id="gallery_image" multiple name="gallery_image" required />
+                                           
+                                        <label class="input-group-text" for="gallery_image">Upload Gallery Image</label>
                                     </div>
                                 </div>
 
@@ -157,19 +181,45 @@
         <!--end::Container-->
     </div>
     <!--end::App Content-->
-@endsection
+
 
 @push('script')
+
+{{--summernote1 --}}
+
     <script>
         $(document).ready(function() {
             $('#summernote').summernote();
         });
     </script>
 
+{{--summernote2 --}}
+
     <script>
         $(document).ready(function() {
             $('#summernote2').summernote();
         });
+    </script>
+    
+{{--add more color --}}
+    <script>
+      $(document).ready(function() {
+
+       $("#add_color").click(function(){
+          $("#colors_fields").append('<input type="text" class="form-control mb-2" id="color_name" name="color_name[]" value=""/>')
+       })
+   })
+    </script>
+
+       
+{{--add more color --}}
+    <script>
+      $(document).ready(function() {
+
+       $("#add_size").click(function(){
+          $("#sizes_fields").append('<input type="text" class="form-control mb-2" id="size_name" name="size_name[]" value=""/>')
+       })
+   })
     </script>
 @endpush
 @endsection
