@@ -79,21 +79,29 @@ class ProductController extends Controller
         }
 
         //GalleryImage..
-      if(isset($request->gallery_image)){
-        foreach($request->gallery_image as $singleImage){
-          $galleryImage = new GalleryImage();
+        if(isset($request->gallery_image)){
+            
+                        foreach($request->gallery_image as $singleImage){
+                $galleryImage = new GalleryImage();
 
-          
-         $galleryImage->product_id = $product->id;
-         $imageName = rand().'-galleryImage'.'.'.$singleImage->extension();
-         $singleImage->move('backend/images/galleryimage/', $imageName);
+                $galleryImage->product_id = $product->id;
 
-         $galleryImage->image = $imageName;
+                $imageName = rand().'-galleryImage'.'.'.$singleImage->extension(); //948094-galleryImage.jpg
+                $singleImage->move('backend/images/galleryimage/',$imageName);
 
-         $galleryImage->save();
+                $galleryImage->image = $imageName;
+                $galleryImage->save();
+            }
         }
-      }
-        
+
+        return redirect()->back();
     }
-   
+
+    public function productList ()
+    {
+        $products = Product:: with('category','subCategory')->get();
+        
+        return view('backend.product.list', compact('products'));
+    }
+    
 }

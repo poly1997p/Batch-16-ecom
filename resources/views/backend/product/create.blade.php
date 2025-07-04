@@ -1,6 +1,5 @@
 @extends('backend.master')
 
-
 @section('content')
     <!--begin::App Content Header-->
     <div class="app-content-header">
@@ -29,7 +28,6 @@
         <div class="container-fluid">
             <!--begin::Row-->
             <div class="row g-4">
-
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Quick Example-->
@@ -47,82 +45,69 @@
                                 <div class="row">
                                     <div class="col-6 mb-3">
                                         <label for="name" class="form-label">Product Name*</label>
-                                        <input type="text" class="form-control" id="name" name="name" required />
+                                        <input type="text" class="form-control" name="name" id="name" required />
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="sku_code" class="form-label">Product Code*</label>
-                                        <input type="text" class="form-control" id="sku_code" name="sku_code" required />
-                                           
-
+                                        <input type="text" class="form-control" name="sku_code" id="sku_code" required />
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label for="cat_id" class="form-label">Product Category*</label>
+                                        <label for="cat_id" class="form-label">Select Category*</label>
                                         <select class="form-control" name="cat_id" id="cat_id">
                                             <option selected disabled>Select Category*</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label for="sub_cat_id" class="form-label">Product SubCategory*</label>
+                                        <label for="sub_cat_id" class="form-label">Select SubCategory*</label>
                                         <select class="form-control" name="sub_cat_id" id="sub_cat_id">
                                             <option selected disabled>Select SubCategory*</option>
                                             @foreach ($subCategories as $subCategory)
-                                                <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                                <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <div class="form-group" id="colors_fields">
-                                          <label for="color_name" class="form-label">Product Color (Optional)</label>
-                                          <input type="text" class="form-control mb-2" id="color_name" name="color_name[]" value=""/>  
+                                        <div class="form-group" id="color_fields">
+                                            <label for="color_name" class="form-label">Product Color (Optional)</label>
+                                            <input type="text" class="form-control mb-2" name="color_name[]" id="color_name" value="" />
                                         </div>
-                                        
-                                        <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>   
-
+                                        <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>
                                     </div>
 
-                                     <div class="col-6 mb-3">
-                                        <div class="form-group" id="sizes_fields">
-                                          <label for="size_name" class="form-label">Product Size (Optional)</label>
-                                          <input type="text" class="form-control mb-2" id="size_name" name="size_name[]" value=""/>  
+                                    <div class="col-6 mb-3">
+                                        <div class="form-group" id="size_fields">
+                                            <label for="size_name" class="form-label">Product Size (Optional)</label>
+                                            <input type="text" class="form-control mb-2" name="size_name[]" id="size_name" value="" />
                                         </div>
-                                        
-                                        <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>   
-
+                                        <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="qty" class="form-label">Product Quantity*</label>
-                                        <input type="number" class="form-control" id="qty" name="qty" required />
+                                        <input type="number" class="form-control" name="qty" id="qty" required />
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="buying_price" class="form-label">Product Buying Price*</label>
-                                        <input type="number" class="form-control" id="buying_price" name="buying_price"
-                                            required />
+                                        <input type="number" class="form-control" name="buying_price" id="buying_price" required />
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="regular_price" class="form-label">Product Regular Price*</label>
-                                        <input type="number" class="form-control" id="regular_price" name="regular_price"
-                                            required />
+                                        <input type="number" class="form-control" name="regular_price" id="regular_price" required />
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label for="discount_price" class="form-label">Product Discount Price
-                                            (Optional)*</label>
-                                        <input type="number" class="form-control" id="discount_price"
-                                            name="discount_price" />
+                                        <label for="discount_price" class="form-label">Product Discount Price (Optional)</label>
+                                        <input type="number" class="form-control" name="discount_price" id="discount_price" />
                                     </div>
-
 
                                     <div class="col-12 mb-3">
                                         <label for="product_type" class="form-label">Select Product Type*</label>
@@ -146,20 +131,15 @@
                                     </div>
 
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" accept="image/*" id="image" name="image" required />
-                                           
-                                        <label class="input-group-text" for="image">Upload Main Image</label>
+                                        <input type="file" class="form-control" accept="image/*" name="image" id="image" required />
+                                        <label class="input-group-text" for="inputGroupFile02">Upload Main Image</label>
                                     </div>
 
-                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" accept="image/*" id="gallery_image" multiple name="gallery_image" required />
-                                           
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" accept="image/*" name="gallery_image[]" id="gallery_image" multiple required />
                                         <label class="input-group-text" for="gallery_image">Upload Gallery Image</label>
                                     </div>
                                 </div>
-
-
-
                             </div>
                             <!--end::Body-->
                             <!--begin::Footer-->
@@ -171,55 +151,47 @@
                         <!--end::Form-->
                     </div>
                     <!--end::Quick Example-->
-
                 </div>
-
-
+                <!--end::Col-->
             </div>
             <!--end::Row-->
         </div>
         <!--end::Container-->
     </div>
     <!--end::App Content-->
-
+@endsection
 
 @push('script')
 
-{{--summernote1 --}}
+{{-- Summernote1 --}}
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+</script>
 
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote();
-        });
-    </script>
+{{-- Summernote --}}
+<script>
+    $(document).ready(function() {
+        $('#summernote2').summernote();
+    });
+</script>
 
-{{--summernote2 --}}
+{{-- Add More Color --}}
+<script>
+    $(document).ready(function(){
+        $("#add_color").click(function(){
+            $("#color_fields").append('<input type="text" class="form-control mb-2" name="color_name[]" id="color_name" value="" />')
+        })
+    })
+</script>
 
-    <script>
-        $(document).ready(function() {
-            $('#summernote2').summernote();
-        });
-    </script>
-    
-{{--add more color --}}
-    <script>
-      $(document).ready(function() {
-
-       $("#add_color").click(function(){
-          $("#colors_fields").append('<input type="text" class="form-control mb-2" id="color_name" name="color_name[]" value=""/>')
-       })
-   })
-    </script>
-
-       
-{{--add more color --}}
-    <script>
-      $(document).ready(function() {
-
-       $("#add_size").click(function(){
-          $("#sizes_fields").append('<input type="text" class="form-control mb-2" id="size_name" name="size_name[]" value=""/>')
-       })
-   })
-    </script>
+{{-- Add More Size --}}
+<script>
+    $(document).ready(function(){
+        $("#add_size").click(function(){
+            $("#size_fields").append('<input type="text" class="form-control mb-2" name="size_name[]" id="size_name" value="" />')
+        })
+    })
+</script>
 @endpush
-@endsection
