@@ -50,7 +50,8 @@ class CategoryController extends Controller
 
       $category = category::find($id);
 
-      if ($category->image && file_exists('backend/images/category/' . $category->image)) {
+      if ($category->image && file_exists('backend/images/category/' . $category->image))
+      {
 
          unlink('backend/images/category/' . $category->image);
       }

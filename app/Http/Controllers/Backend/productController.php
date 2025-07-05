@@ -27,6 +27,7 @@ class ProductController extends Controller
         return view('backend.product.create', compact('categories', 'subCategories'));
     }
 
+    //product-store
     public function productStore (Request $request)
     {
         $product = new Product();
@@ -96,12 +97,73 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
-
-    public function productList ()
+      
+    //product_list
+    public function productList()
     {
         $products = Product:: with('category','subCategory')->get();
         
         return view('backend.product.list', compact('products'));
+    }
+
+    //product_delete
+    public function productDelete($id)
+    {
+      $product = Product::find($id);
+
+      
+      if ($product->image && file_exists('backend/images/product/' . $product->image))
+      {
+
+         unlink('backend/images/product/' . $product->image);
+      }
+
+      //color delete
+
+      $colors = Color::where('product_id', $product->id)->get();
+
+      foreach($colors as $color)
+      {
+         $color->delete();
+      }
+
+      //size delete
+       
+      $sizes = Size::where('product_id', $product->id)->get();
+
+      foreach($sizes as $size)
+      {
+        $size->delete();
+      }
+
+      //gallery image delete
+
+      $galleryImages = GalleryImage:: where('product_id', $product->id)->get();
+
+      foreach($galleryImages as $singleImage)
+      {
+        if ($singleImage->image && file_exists('backend/images/galleryimage/' . $singleImage->image))
+        {
+
+         unlink('backend/images/galleryimage/'. $singleImage->image);
+        }
+        
+        $singleImage->delete();
+      }
+
+      $product->delete();
+      return redirect()->back();
+    }
+
+    //product edit
+
+    public function productEdit($id)
+    {
+      $product = Product:: where('id', $id)->with('color','size', 'galleryImage')->first();
+
+      $categories= Category::all();
+      $subCategories= SubCategory::all();
+      return view('backend.product.edit', compact('product', 'categories', 'subCategories'));
     }
     
 }
