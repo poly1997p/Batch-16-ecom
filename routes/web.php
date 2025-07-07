@@ -79,3 +79,6 @@ Route::post('/admin/product/Update/{id}', [productController::class, 'productUpd
 //delete button ,edit button
 Route::get('/admin/product/color/delete/{id}', [productController::class, 'colorDelete']);
 Route::get('/admin/product/size/delete/{id}', [productController::class, 'sizeDelete']);
+Route::get('/admin/product/gallery-image/delete/{id}', [productController::class, 'galleryImageDelete']);
+Route::get('/admin/product/gallery-image/edit/{id}', [productController::class, 'galleryImageEdit']);
+Route::post('/admin/product/gallery-image/update/{id}', [productController::class, 'galleryImageUpdate']);

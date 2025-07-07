@@ -161,8 +161,8 @@
                                         @foreach ($product->galleryImage as $singleImage)
                                             <img class="mb-2" src="{{asset('backend/images/galleryimage/'.$singleImage->image)}}" height="100" width="100">
                                             <div class="mb-2">
-                                                <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                                                <a href="" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="{{url('/admin/product/gallery-image/delete/'.$singleImage->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                                <a href="{{url('/admin/product/gallery-image/edit/'.$singleImage->id)}}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
                                             </div>
                                         @endforeach
                                     </div>

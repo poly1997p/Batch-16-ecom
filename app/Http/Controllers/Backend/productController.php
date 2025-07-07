@@ -28,7 +28,7 @@ class ProductController extends Controller
     }
 
     //product-store
-    public function productStore (Request $request)
+    public function productStore(Request $request)
     {
         $product = new Product();
 
@@ -45,20 +45,19 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->product_policy = $request->product_policy;
 
-        if(isset($request->image)){
-            $imageName = rand().'-product-'.'.'.$request->image->extension(); //12345-product-.webp
+        if (isset($request->image)) {
+            $imageName = rand() . '-product-' . '.' . $request->image->extension(); //12345-product-.webp
             $request->image->move('backend/images/product/', $imageName);
 
             $product->image = $imageName;
-
         }
 
         $product->save();
 
         // Add Color..
-        if(isset($request->color_name) && $request->color_name[0] != null){
-            
-            foreach($request->color_name as $singleColor){ //green
+        if (isset($request->color_name) && $request->color_name[0] != null) {
+
+            foreach ($request->color_name as $singleColor) { //green
                 $color = new Color();
                 $color->color_name = $singleColor;
                 $color->slug = Str::slug($singleColor);
@@ -68,9 +67,9 @@ class ProductController extends Controller
         }
 
         // Add Size..
-        if(isset($request->size_name) && $request->size_name[0] != null){
-            
-            foreach($request->size_name as $singleSize){ //M
+        if (isset($request->size_name) && $request->size_name[0] != null) {
+
+            foreach ($request->size_name as $singleSize) { //M
                 $size = new Size();
                 $size->size_name = $singleSize;
                 $size->slug = Str::slug($singleSize);
@@ -80,15 +79,15 @@ class ProductController extends Controller
         }
 
         //GalleryImage..
-        if(isset($request->gallery_image)){
-            
-                        foreach($request->gallery_image as $singleImage){
+        if (isset($request->gallery_image)) {
+
+            foreach ($request->gallery_image as $singleImage) {
                 $galleryImage = new GalleryImage();
 
                 $galleryImage->product_id = $product->id;
 
-                $imageName = rand().'-galleryImage'.'.'.$singleImage->extension(); //948094-galleryImage.jpg
-                $singleImage->move('backend/images/galleryimage/',$imageName);
+                $imageName = rand() . '-galleryImage' . '.' . $singleImage->extension(); //948094-galleryImage.jpg
+                $singleImage->move('backend/images/galleryimage/', $imageName);
 
                 $galleryImage->image = $imageName;
                 $galleryImage->save();
@@ -97,73 +96,68 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
-      
+
     //product_list
     public function productList()
     {
-        $products = Product:: with('category','subCategory')->get();
-        
+        $products = Product::with('category', 'subCategory')->get();
+
         return view('backend.product.list', compact('products'));
     }
 
     //product_delete
     public function productDelete($id)
     {
-      $product = Product::find($id);
+        $product = Product::find($id);
 
-      
-      if ($product->image && file_exists('backend/images/product/' . $product->image))
-      {
 
-         unlink('backend/images/product/' . $product->image);
-      }
+        if ($product->image && file_exists('backend/images/product/' . $product->image)) {
 
-      //color delete
-
-      $colors = Color::where('product_id', $product->id)->get();
-
-      foreach($colors as $color)
-      {
-         $color->delete();
-      }
-
-      //size delete
-       
-      $sizes = Size::where('product_id', $product->id)->get();
-
-      foreach($sizes as $size)
-      {
-        $size->delete();
-      }
-
-      //gallery image delete
-
-      $galleryImages = GalleryImage:: where('product_id', $product->id)->get();
-
-      foreach($galleryImages as $singleImage)
-      {
-        if ($singleImage->image && file_exists('backend/images/galleryimage/' . $singleImage->image))
-        {
-
-         unlink('backend/images/galleryimage/'. $singleImage->image);
+            unlink('backend/images/product/' . $product->image);
         }
-        
-        $singleImage->delete();
-      }
 
-      $product->delete();
-      return redirect()->back();
+        //color delete
+
+        $colors = Color::where('product_id', $product->id)->get();
+
+        foreach ($colors as $color) {
+            $color->delete();
+        }
+
+        //size delete
+
+        $sizes = Size::where('product_id', $product->id)->get();
+
+        foreach ($sizes as $size) {
+            $size->delete();
+        }
+
+        //gallery image delete
+
+        $galleryImages = GalleryImage::where('product_id', $product->id)->get();
+
+        foreach ($galleryImages as $singleImage) {
+            if ($singleImage->image && file_exists('backend/images/galleryimage/' . $singleImage->image)) {
+
+                unlink('backend/images/galleryimage/' . $singleImage->image);
+            }
+
+            $singleImage->delete();
+        }
+
+        $product->delete();
+        return redirect()->back();
     }
 
     //product edit
 
     public function productEdit($id)
     {
-      $product = Product:: where('id', $id)->with('color','size', 'galleryImage')->first();
+        $product = Product::where('id', $id)->with('color', 'size', 'galleryImage')->first();
 
-      $categories= Category::all();
-      $subCategories= SubCategory::all();
-      return view('backend.product.edit', compact('product', 'categories', 'subCategories'));
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        return view('backend.product.edit', compact('product', 'categories', 'subCategories'));
     }
 
     //product update
@@ -183,37 +177,31 @@ class ProductController extends Controller
         $product->product_type = $request->product_type;
         $product->description = $request->description;
         $product->product_policy = $request->product_policy;
-      
 
-        if(isset($request->image))
-        {
-            if ($product->image && file_exists('backend/images/product/' . $product->image))
-          {
-             unlink('backend/images/product/' . $product->image);
-          }
 
-            $imageName = rand().'-productup-'.'.'.$request->image->extension(); //12345-product-.webp
+        if (isset($request->image)) {
+            if ($product->image && file_exists('backend/images/product/' . $product->image)) {
+                unlink('backend/images/product/' . $product->image);
+            }
+
+            $imageName = rand() . '-productup-' . '.' . $request->image->extension(); //12345-product-.webp
             $request->image->move('backend/images/product/', $imageName);
 
             $product->image = $imageName;
-            
         }
 
         $product->save();
 
-       // Add Color update..
-        if(isset($request->color_name) && $request->color_name[0] != null)
-        {
-            
+        // Add Color update..
+        if (isset($request->color_name) && $request->color_name[0] != null) {
+
             $colors = Color::where('product_id', $product->id)->get();
 
-            foreach($colors as $singleColor)
-            {
-               $singleColor->delete();
+            foreach ($colors as $singleColor) {
+                $singleColor->delete();
             }
 
-            foreach($request->color_name as $singleColor)
-            { //green
+            foreach ($request->color_name as $singleColor) { //green
                 $color = new Color();
                 $color->color_name = $singleColor;
                 $color->slug = Str::slug($singleColor);
@@ -222,19 +210,16 @@ class ProductController extends Controller
             }
         }
 
-          // Add Size update..
-        if(isset($request->size_name) && $request->size_name[0] != null)
-        {
-            
+        // Add Size update..
+        if (isset($request->size_name) && $request->size_name[0] != null) {
+
             $sizes = Size::where('product_id', $product->id)->get();
 
-            foreach($sizes as $singleSize)
-            {
+            foreach ($sizes as $singleSize) {
                 $singleSize->delete();
             }
 
-            foreach($request->size_name as $singleSize)
-            { 
+            foreach ($request->size_name as $singleSize) {
                 $size = new Size();
                 $size->size_name = $singleSize;
                 $size->slug = Str::slug($singleSize);
@@ -243,30 +228,26 @@ class ProductController extends Controller
             }
         }
 
-         //GalleryImage update..
-        if(isset($request->gallery_image))
-        {
-            $galleryImages = GalleryImage:: where('product_id', $product->id)->get();
+        //GalleryImage update..
+        if (isset($request->gallery_image)) {
+            $galleryImages = GalleryImage::where('product_id', $product->id)->get();
 
-                foreach($galleryImages as $singleImage)
-                {
-                    if ($singleImage->image && file_exists('backend/images/galleryimage/'.$singleImage->image))
-                    {
+            foreach ($galleryImages as $singleImage) {
+                if ($singleImage->image && file_exists('backend/images/galleryimage/' . $singleImage->image)) {
 
-                      unlink('backend/images/galleryimage/'. $singleImage->image);
-                    }
-
-                   $singleImage->delete();
+                    unlink('backend/images/galleryimage/' . $singleImage->image);
                 }
 
-                foreach($request->gallery_image as $singleImage)
-            {
+                $singleImage->delete();
+            }
+
+            foreach ($request->gallery_image as $singleImage) {
                 $galleryImage = new GalleryImage();
 
                 $galleryImage->product_id = $product->id;
 
-                $imageName = rand().'-galleryImage'.'.'.$singleImage->extension(); //948094-galleryImage.jpg
-                $singleImage->move('backend/images/galleryimage/',$imageName);
+                $imageName = rand() . '-galleryImage' . '.' . $singleImage->extension(); //948094-galleryImage.jpg
+                $singleImage->move('backend/images/galleryimage/', $imageName);
 
                 $galleryImage->image = $imageName;
                 $galleryImage->save();
@@ -276,21 +257,66 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
-
+    //color update delete
     public function colorDelete($id)
     {
-      $color = Color::find($id);
-      $color->delete();
+        $color = Color::find($id);
+        $color->delete();
 
-      return redirect()->back();
+        return redirect()->back();
     }
-
+    //size update delete
     public function sizeDelete($id)
     {
-      $size = Size::find($id);
-      $size->delete();
+        $size = Size::find($id);
+        $size->delete();
 
-      return redirect()->back();
+        return redirect()->back();
     }
-    
+
+    //galleryimage update delete...
+
+    public function galleryImageDelete($id)
+    {
+
+        $galleryImage = GalleryImage::find($id);
+
+        if ($galleryImage->image && file_exists('backend/images/galleryimage/' . $galleryImage->image)) {
+
+            unlink('backend/images/galleryimage/' . $galleryImage->image);
+        }
+
+        $galleryImage->delete();
+        return redirect()->back();
+    }
+
+    //galleryimage update edit...
+
+    public function galleryImageEdit($id)
+    {
+        $galleryImage = GalleryImage::with('product')->where('id', $id)->first();
+        return view('backend.product.edit-galleryimage', compact('galleryImage'));
+    }
+
+    public function galleryImageUpdate(Request $request, $id)
+    {
+        $galleryImage = GalleryImage::find($id);
+
+        if (isset($request->image))
+        {
+
+            if ($galleryImage->image && file_exists('backend/images/galleryimage/' . $galleryImage->image))
+            {
+
+                unlink('backend/images/galleryimage/' . $galleryImage->image);
+            }
+
+             $imageName = rand().'-galleryImage'.'.'.$request->image->extension(); //948094-galleryImage.jpg
+            $request->image->move('backend/images/galleryimage/',$imageName);
+        }
+        $galleryImage->image = $imageName;
+
+         $galleryImage->save();
+         return redirect('/admin/product/edit/'.$galleryImage->product_id);
+    }
 }
