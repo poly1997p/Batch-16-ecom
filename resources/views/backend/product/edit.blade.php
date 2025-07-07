@@ -82,7 +82,8 @@
                                             <label for="color_name" class="form-label">Product Color (Optional)</label>
                                              
                                            @foreach ($product->color as $singleColor)
-                                             <input type="text" class="form-control mb-2" value="{{$singleColor->color_name}}" name="color_name[]" id="color_name" value=""/>  
+                                             <input type="text" class="form-control mb-2" value="{{$singleColor->color_name}}" name="color_name[]" id="color_name" value=""/> 
+                                             <a href="{{url('/admin/product/color/delete/'.$singleColor->id)}}" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></a> 
                                            @endforeach
                                         </div>
                                         <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>
@@ -92,7 +93,8 @@
                                         <div class="form-group" id="size_fields">
                                             <label for="size_name" class="form-label">Product Size (Optional)</label>
                                           @foreach ($product->size as $singleSize)
-                                                <input type="text" class="form-control mb-2" value="{{$singleSize->size_name}}" name="size_name[]" id="size_name" value="" />
+                                                <input type="text" class="form-control mb-2" value="{{$singleSize->size_name}}" name="size_name[]" id="size_name" value=""/>
+                                                <a href="{{url('/admin/product/size/delete/'.$singleSize->id)}}" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></a> 
                                           @endforeach
                                         </div>
                                         <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>
@@ -157,7 +159,11 @@
                                         <input type="file" class="form-control" accept="image/*" name="gallery_image[]" id="gallery_image" multiple />
                                         <label class="input-group-text" for="gallery_image">Upload Gallery Image</label>
                                         @foreach ($product->galleryImage as $singleImage)
-                                            <img src="{{asset('backend/images/galleryimage/'.$singleImage->image)}}" height="100" width="100">
+                                            <img class="mb-2" src="{{asset('backend/images/galleryimage/'.$singleImage->image)}}" height="100" width="100">
+                                            <div class="mb-2">
+                                                <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                                <a href="" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>

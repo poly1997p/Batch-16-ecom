@@ -165,5 +165,132 @@ class ProductController extends Controller
       $subCategories= SubCategory::all();
       return view('backend.product.edit', compact('product', 'categories', 'subCategories'));
     }
+
+    //product update
+    public function productUpdate(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->slug = str::slug($request->name);
+        $product->sku_code = $request->sku_code;
+        $product->cat_id = $request->cat_id;
+        $product->sub_cat_id = $request->sub_cat_id;
+        $product->qty = $request->qty;
+        $product->buying_price = $request->buying_price;
+        $product->regular_price = $request->regular_price;
+        $product->discount_price = $request->buying_price;
+        $product->product_type = $request->product_type;
+        $product->description = $request->description;
+        $product->product_policy = $request->product_policy;
+      
+
+        if(isset($request->image))
+        {
+            if ($product->image && file_exists('backend/images/product/' . $product->image))
+          {
+             unlink('backend/images/product/' . $product->image);
+          }
+
+            $imageName = rand().'-productup-'.'.'.$request->image->extension(); //12345-product-.webp
+            $request->image->move('backend/images/product/', $imageName);
+
+            $product->image = $imageName;
+            
+        }
+
+        $product->save();
+
+       // Add Color update..
+        if(isset($request->color_name) && $request->color_name[0] != null)
+        {
+            
+            $colors = Color::where('product_id', $product->id)->get();
+
+            foreach($colors as $singleColor)
+            {
+               $singleColor->delete();
+            }
+
+            foreach($request->color_name as $singleColor)
+            { //green
+                $color = new Color();
+                $color->color_name = $singleColor;
+                $color->slug = Str::slug($singleColor);
+                $color->product_id = $product->id;
+                $color->save();
+            }
+        }
+
+          // Add Size update..
+        if(isset($request->size_name) && $request->size_name[0] != null)
+        {
+            
+            $sizes = Size::where('product_id', $product->id)->get();
+
+            foreach($sizes as $singleSize)
+            {
+                $singleSize->delete();
+            }
+
+            foreach($request->size_name as $singleSize)
+            { 
+                $size = new Size();
+                $size->size_name = $singleSize;
+                $size->slug = Str::slug($singleSize);
+                $size->product_id = $product->id;
+                $size->save();
+            }
+        }
+
+         //GalleryImage update..
+        if(isset($request->gallery_image))
+        {
+            $galleryImages = GalleryImage:: where('product_id', $product->id)->get();
+
+                foreach($galleryImages as $singleImage)
+                {
+                    if ($singleImage->image && file_exists('backend/images/galleryimage/'.$singleImage->image))
+                    {
+
+                      unlink('backend/images/galleryimage/'. $singleImage->image);
+                    }
+
+                   $singleImage->delete();
+                }
+
+                foreach($request->gallery_image as $singleImage)
+            {
+                $galleryImage = new GalleryImage();
+
+                $galleryImage->product_id = $product->id;
+
+                $imageName = rand().'-galleryImage'.'.'.$singleImage->extension(); //948094-galleryImage.jpg
+                $singleImage->move('backend/images/galleryimage/',$imageName);
+
+                $galleryImage->image = $imageName;
+                $galleryImage->save();
+            }
+        }
+
+
+        return redirect()->back();
+    }
+
+    public function colorDelete($id)
+    {
+      $color = Color::find($id);
+      $color->delete();
+
+      return redirect()->back();
+    }
+
+    public function sizeDelete($id)
+    {
+      $size = Size::find($id);
+      $size->delete();
+
+      return redirect()->back();
+    }
     
 }
