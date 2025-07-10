@@ -10,43 +10,62 @@
                                 <div class="col-lg-7 col-md-7">
                                     <div class="product-images-slider-outer">
                                         <div class="slider slider-content">
+                                           @foreach ($product->galleryImage as $image)
                                             <div>
-                                                <img src="{{asset('/frontend/images/product.png')}}" alt="slider images">
+                                                <img src="{{asset('/backend/images/galleryImage/'.$image->image)}}" alt="slider images">
                                             </div>
+                                           @endforeach
                                         </div>
                                         <div class="slider slider-thumb">
+                                        @foreach ($product->galleryImage as $image)
                                             <div>
-                                                <img src="{{asset('/frontend/images/product.png')}}" alt="slider images">
+                                                <img src="{{asset('/backend/images/galleryImage/'.$image->image)}}" alt="slider images">
                                             </div>
+                                           @endforeach
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-5">
                                     <div class="product-details-content">
                                         <h3 class="product-name">
-                                            Test Product
+                                            {{$product->name}}
                                         </h3>
                                         <div class="product-price">
-                                            <span>300 Tk.</span>
+                                            @if ($product->discount_price != null)
+                                            <span>{{$product->discount_price}}.tk</span>
+
                                             <span class="" style="color: #f74b81;">
-                                                <del>400 Tk.</del>
+                                                <del>{{$product->regular_price}} .tk</del>
                                             </span>
+
+                                            @elseif ($product->discount_price == null)
+                                             <span>{{$product->regular_price}} .tk</span>
+                                            @endif
                                         </div>
+
+                                        <form action="" method="POST">
+
                                         <div class="product-details-select-items-wrap">
-                                            <div class="product-details-select-item-outer">
-                                                <input type="radio" name="color" id="color" value="Red" class="category-item-radio">
+                                            @foreach ($product->color as $singleColor)
+                                                <div class="product-details-select-item-outer">
+                                                <input type="radio" name="color" id="color" value="{{$singleColor->color_name}}" class="category-item-radio">
                                                 <label for="color" class="category-item-label">
-                                                    Red
+                                                   {{$singleColor->color_name}}
                                                 </label>
                                             </div>
+                                            @endforeach
                                         </div>
                                         <div class="product-details-select-items-wrap">
-                                            <div class="product-details-select-item-outer">
-                                                <input type="radio" name="size" value="XXl" class="category-item-radio">
-                                                <label for="size" class="category-item-label">XXl</label>
+                                            @foreach ($product->size as $singleSize)
+                                                <div class="product-details-select-item-outer">
+                                                <input type="radio" name="size" value="{{$singleSize->size_name}}" class="category-item-radio">
+                                                <label for="size" class="category-item-label">
+                                                  {{$singleSize->size_name}}
+                                                </label>
                                             </div>
+                                            @endforeach
                                         </div>
-                                        <form action="" method="POST">
+                                        
                                             <div class="purchase-info-outer">
                                                 <div class="product-incremnt-decrement-outer" style="display: block">
                                                     <a title="Decrement" class="decrement-btn" style="margin-top: -10px;">
@@ -80,7 +99,7 @@
                                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true">
-                                            Description
+                                           Description
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
@@ -96,7 +115,7 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus, ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi, corrupti voluptatibus. Similique doloremque velit optio aliquam.
+                                        {!!$product->description!!}
                                     </div>
                                     <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
                                         <div class="review-item-wrapper">
@@ -109,7 +128,7 @@
                                                     <span class=" d-inline bg-danger badge-sm badge text-white">Verified</span>
                                                 </h4>
                                                 <p class="review-item-message">
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus, ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi.
+                                                hyhjujukdtr
                                                 </p>
                                                 <span class="review-item-rating-stars">
                                                     <i class="fa-star fas"></i>
@@ -122,8 +141,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-policy" role="tabpanel" aria-labelledby="pills-policy-tab">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus,
-                                        ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi
+                                       {!!$product->product_policy!!}
                                     </div>
                                 </div>
                             </div>
@@ -135,10 +153,12 @@
                                 <h3 class="product-details-title">
                                     Category
                                 </h3>
-                                <a href="#" class="category-item-outer">
-                                    <img src="{{asset('/frontend/images/product.png')}}" alt="category image">
-                                    Test Category
+                                @foreach ($categories as $category)
+                                    <a href="#" class="category-item-outer">
+                                    <img src="{{asset('/backend/images/category/'.$category->image)}}" alt="category image">
+                                    {{$category->name}}
                                 </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

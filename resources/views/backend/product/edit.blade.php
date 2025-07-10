@@ -128,13 +128,13 @@
                                                selected 
                                             @endif>Hot Product</option>
                                             <option value="regular" @if ($product->product_type == "regular")
-                                                
+                                                selected
                                             @endif>Regular Product</option>
                                             <option value="new" @if ($product->product_type == "new")
-                                                
+                                                 selected
                                             @endif>New Arrival</option>
                                             <option value="discount" @if ($product->product_type == "discount")
-                                                
+                                                 selected
                                             @endif>Discount Product</option>
                                         </select>
                                     </div>

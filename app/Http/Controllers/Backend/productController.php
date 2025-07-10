@@ -173,7 +173,7 @@ class ProductController extends Controller
         $product->qty = $request->qty;
         $product->buying_price = $request->buying_price;
         $product->regular_price = $request->regular_price;
-        $product->discount_price = $request->buying_price;
+        $product->discount_price = $request->discount_price;
         $product->product_type = $request->product_type;
         $product->description = $request->description;
         $product->product_policy = $request->product_policy;
