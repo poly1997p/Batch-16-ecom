@@ -116,10 +116,10 @@
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
-									<del>{{$product->regular_price}}</del>
+									<del>{{$product->regular_price}}.tk</del>
 								</div>
 								<div class="product__item-regular-price">
-									<span>{{$product->discount_price}}</span>
+									<span>{{$product->discount_price}}.tk</span>
 								</div>
 							</div>
 						</div>
@@ -166,10 +166,10 @@
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
-									<del>{{$product->regular_price}}</del>
+									<del>{{$product->regular_price}}.tk</del>
 								</div>
 								<div class="product__item-regular-price">
-									<span>{{$product->discount_price}}</span>
+									<span>{{$product->discount_price}}.tk</span>
 								</div>
 							</div>
 						</div>

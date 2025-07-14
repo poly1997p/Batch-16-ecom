@@ -166,3 +166,22 @@
             </div>
         </section>  
 @endsection
+
+@push('script')
+    <script>
+        let qtyInput = document.getElementById('qty');
+
+        let minusBtn = document.querySelector('.decrement-btn');
+        let plusBtn = document.querySelector('.increment-btn');
+
+        minusBtn.addEventListener('click', function(){
+          if(parseInt(qtyInput.value) > 1){
+              qtyInput.value = parseInt(qtyInput.value ) -1;
+              }
+        });
+
+         plusBtn.addEventListener('click', function(){
+          qtyInput.value = parseInt(qtyInput.value ) +1;
+        });
+    </script>
+@endpush
