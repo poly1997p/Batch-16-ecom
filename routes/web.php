@@ -31,6 +31,11 @@ Route:: get ('/type-products/{type}', [FrontendController::class, 'typeProducts'
 Route:: get ('/view-cart-products', [FrontendController::class, 'viewCart']);
 Route:: get ('/checkout', [FrontendController::class, 'checkOut']);
 
+//Add to cart routes
+
+Route:: post('/product-details/add-to-cart/{product_id}', [FrontendController::class, 'addToCartDetails']);
+Route:: get('/add-to-cart/{product_id}', [FrontendController::class, 'addToCart']);
+
 //policy--
 
 Route:: get ('/privecy-policy', [FrontendController::class, 'privecyPolicy']);
