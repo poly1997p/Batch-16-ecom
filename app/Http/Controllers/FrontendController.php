@@ -137,6 +137,13 @@ class FrontendController extends Controller
       }
     }
 
+    public function addToCartDelete($id){
+        $cart = Cart::find($id);
+        $cart->delete();
+
+        return redirect()->back();
+    }
+
      public function typeProducts($type){
         return view ('frontend.type-products', compact('type'));
     } 

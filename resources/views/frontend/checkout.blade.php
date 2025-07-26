@@ -62,7 +62,7 @@
                                             <span class="checkout-item-count">
                                                 Color: 
                                             </span>
-                                            <div class="checkout-product-incre-decre">
+                                            {{--<div class="checkout-product-incre-decre">
                                                 <button type="button" title="Decrement" class="qty-decrement-btn">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
@@ -70,7 +70,7 @@
                                                 <button type="button" title="Increment" class="qty-increment-btn">
                                                     <i class="fas fa-plus"></i>
                                                 </button>                                                
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </div>
                                     <div class="checkout-item-right">
