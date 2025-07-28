@@ -32,7 +32,7 @@
                                     @endforeach
 
                                     <div class="col-md-12 mt-3">
-                                        @if ($totalPrice >= 60000)
+                                        @if ($totalPrice >= 80000)
                                             <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
                                                 <input type="radio" id="inside_dhaka" name="area" checked
                                                     value="00" onclick="" />
@@ -50,7 +50,7 @@
                                             </div>
                                             <div style="background: lightgrey;padding: 10px;">
                                                 <input type="radio" id="outside_dhaka" name="area" checked
-                                                    value="150" onclick="insideDhakaCharge()" />
+                                                    value="150" onclick="outsideDhakaCharge()" />
                                                 <label for="outside_dhaka"
                                                     style="font-size: 18px;font-weight: 600;color: #000;">Outside Dhaka (150
                                                     Tk.)</label>
@@ -126,7 +126,7 @@
                                 </div>
                                   <div class="sub-total-item">
                                         <strong>Delivery charge</strong>
-                                        @if ($totalPrice >= 60000)
+                                        @if ($totalPrice >= 80000)
                                             <strong id="deliveryCharge">৳ 0</strong>
                                             @else
                                             <strong id="deliveryCharge">৳ 80</strong>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="sub-total-item grand-total">
                                          <strong>Grand Total</strong>
-                                         @if ($totalPrice >= 60000)
+                                         @if ($totalPrice >= 80000)
                                              <strong id="grandTotal">৳ {{$totalPrice+0}}</strong>
                                              <input type="hidden" name="inputGrandTotal" id="inputGrandTotal" value="{{$totalPrice+0}}">
                                              @else
@@ -175,6 +175,15 @@
         function insideDhakaCharge() {
             document.getElementById('deliveryCharge').innerHTML = "৳ " + 80;
             let  totalPrice = parseFloat(document.getElementById('inputTotalPrice').value);
+            let grandTotal = totalPrice+80;
+            document.getElementById('grandTotal').innerHTML = "৳" +grandTotal;
+        }
+
+         function outsideDhakaCharge() {
+            document.getElementById('deliveryCharge').innerHTML = "৳ " + 150;
+            let  totalPrice = parseFloat(document.getElementById('inputTotalPrice').value);
+            let grandTotal = totalPrice+150;
+            document.getElementById('grandTotal').innerHTML = "৳" +grandTotal;
         }
     </script>
 @endpush
