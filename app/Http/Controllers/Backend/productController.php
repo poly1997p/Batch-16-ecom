@@ -93,7 +93,7 @@ class ProductController extends Controller
                 $galleryImage->save();
             }
         }
-
+        toastr()->success('product added successfully!');
         return redirect()->back();
     }
 

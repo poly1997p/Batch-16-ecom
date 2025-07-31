@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route:: get ('/', [FrontendController::class, 'index' ]);
+Route:: get ('/category-products/{slug}/{id}', [FrontendController::class, 'categoryProducts']);
+Route:: get ('/subcategory-products/{slug}/{id}', [FrontendController::class, 'subCategoryProducts']);
 Route:: get ('/shop', [FrontendController::class, 'shopProducts']);
 Route:: get ('/return-process', [FrontendController::class, 'returnProcess']);
 Route:: get ('/product-details/{slug}', [FrontendController::class, 'productDetails']);
