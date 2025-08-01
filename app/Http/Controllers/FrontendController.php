@@ -15,10 +15,10 @@ class FrontendController extends Controller
     public function index(){
        $categories = Category::orderBy('name', 'asc')->with('subCategory')->get();
        
-       $hotProducts = Product::where('product_type', 'hot')->orderBy('id', 'desc')->get();
-       $newProducts = Product::where('product_type', 'new')->orderBy('id', 'desc')->get();
-       $regularProducts = Product::where('product_type', 'regular')->orderBy('id', 'desc')->get();
-       $discountProducts = Product::where('product_type', 'discount')->orderBy('id', 'desc')->get();
+       $hotProducts = Product::where('product_type', 'hot')->orderBy('id', 'desc')->paginate(20);
+       $newProducts = Product::where('product_type', 'new')->orderBy('id', 'desc')->paginate(20);
+       $regularProducts = Product::where('product_type', 'regular')->orderBy('id', 'desc')->paginate(20);
+       $discountProducts = Product::where('product_type', 'discount')->orderBy('id', 'desc')->paginate(20);
 
        return view('frontend.index', compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'categories'));
     }
@@ -168,7 +168,9 @@ class FrontendController extends Controller
     }
 
      public function typeProducts($type){
-        return view ('frontend.type-products', compact('type'));
+        $products = Product::where('product_type', $type)->get();
+        $productsCount = Product::where('product_type', $type)->count();
+        return view ('frontend.type-products', compact('type', 'products', 'productsCount'));
     } 
 
      public function viewCart(){
