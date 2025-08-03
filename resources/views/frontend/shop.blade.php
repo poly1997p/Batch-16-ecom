@@ -14,11 +14,12 @@
                                 <span>categories</span>
                                 <i class="fas fa-angle-down"></i>
                             </div>
-                            <form class="filter-items" id="collapseOne" action="" method="GET">
+                            <form class="filter-items" id="collapseOne" action="{{url('/shop')}}" method="GET">
+                                @csrf
                                 @foreach ($generalCategories as $category)
                                     <div class="item-label">
                                         <label>
-                                            <input type="checkbox" value="" id="" name=""
+                                            <input type="checkbox" value="{{$category->id}}" id="cat_id" name="cat_id"
                                                 class="checkbox" />
                                             <span>{{ $category->name }}</span>
                                         </label>
@@ -32,11 +33,12 @@
                                 <span>sub categories</span>
                                 <i class="fas fa-angle-down"></i>
                             </div>
-                            <form class="filter-items" id="collapseTwo" action="" method="GET">
+                            <form class="filter-items" id="collapseTwo" action="{{url('/shop')}}" method="GET">
+                                @csrf
                                 @foreach ($generalSubCategories as $subCategory)
                                     <div class="item-label">
                                         <label>
-                                            <input type="checkbox" value="" id="" name=""
+                                            <input type="checkbox" value="{{$subCategory->id}}" id="sub_cat_id" name="sub_cat_id"
                                                 class="checkbox" />
                                             <span>
                                                 {{ $subCategory->name }}
@@ -86,19 +88,24 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="product__item-price-outer">
-                                        @if ($product->discount_price != null)
-                                            <div class="product__item-discount-price">
-                                                <del>{{ $product->regular_price }} Tk.</del>
-                                            </div>
-                                            <div class="product__item-regular-price">
-                                                <span>{{ $product->discount_price }} Tk.</span>
-                                            </div>
-                                        @else
-                                            <div class="product__item-regular-price">
-                                                <span>{{ $product->regular_price }} Tk.</span>
-                                            </div>
-                                        @endif
+                                    <div class="product__item-info-outer">
+                                        <a href="{{ url('product-details/' . $product->slug) }}" class="product__item-name">
+                                            {{ $product->name }}
+                                        </a>
+                                        <div class="product__item-price-outer">
+                                            @if ($product->discount_price != null)
+                                                <div class="product__item-discount-price">
+                                                    <del>{{ $product->regular_price }} Tk.</del>
+                                                </div>
+                                                <div class="product__item-regular-price">
+                                                    <span>{{ $product->discount_price }} Tk.</span>
+                                                </div>
+                                            @else
+                                                <div class="product__item-regular-price">
+                                                    <span>{{ $product->regular_price }} Tk.</span>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,5 +114,7 @@
                 </div>
             </div>
         </div>
+        {{--{{$products->(links)}}--}}
+        
     </section>
 @endsection

@@ -39,9 +39,22 @@ class FrontendController extends Controller
     return view('frontend.subcategory-products', compact('subCategory', 'products', 'productsCount'));
    }
 
-    public function shopProducts(){
-        $products = Product::orderBy('id', 'desc')->get();
-        $productsCount = Product::orderBy('id', 'desc')->count();
+    public function shopProducts(Request $request){
+
+        if(isset($request->cat_id)){
+             $products = Product::orderBy('id', 'desc')->where('cat_id', $request->cat_id)->paginate(20);
+        }
+
+        elseif(isset($request->sub_cat_id)){
+             $products = Product::orderBy('id', 'desc')->where('sub_cat_id', $request->sub_cat_id)->paginate(20);
+        }
+
+        else{
+            $products = Product::orderBy('id', 'desc')->paginate(20);
+        }
+
+       
+        $productsCount = $products->count();
         return view ('frontend.shop', compact('products', 'productsCount'));
     }
 
