@@ -17,7 +17,7 @@
                                 <ul class="header__nav-item-category-submenu">
                                     @foreach ($category->subCategory as $subCategory)
                                         <li class="header__category-submenu-item">
-                                            <a href="{{ url('/subcategory-products/' . $subCategory->slug . '/' . $subCategory->id) }}"
+                                            <a href="{{ url('subcategory-products/' . $subCategory->slug . '/' . $subCategory->id) }}"
                                                 class="header__category-submenu-item-link">
                                                 {{ $subCategory->name }}
                                             </a>
@@ -66,21 +66,14 @@
     <section class="banner-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="banner-item-outer">
-                        <img src="{{ asset('/frontend/images/banner.jpeg') }}" alt="banner image" />
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="banner-item-outer">
-                        <img src="{{ asset('/frontend/images/banner.jpeg') }}" alt="banner image" />
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="banner-item-outer">
-                        <img src="{{ asset('/frontend/images/banner.jpeg') }}" alt="banner image" />
-                    </div>
-                </div>
+                @foreach ($banners as $banner)
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                       <div class="banner-item-outer">
+                          <img src="{{ asset('backend/images/banner/'.$banner->image) }}" alt="banner image" />
+                       </div>
+                  </div>
+                @endforeach
+              
             </div>
         </div>
     </section>

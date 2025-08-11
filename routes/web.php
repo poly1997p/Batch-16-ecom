@@ -44,7 +44,7 @@ Route:: post('/product-details/add-to-cart/{product_id}', [FrontendController::c
 Route:: get('/add-to-cart/{product_id}', [FrontendController::class, 'addToCart']);
 Route:: get('/add-to-cart/delete/{id}', [FrontendController::class, 'addToCartDelete']);
 
-//policy--
+//policy...
 
 Route:: get ('/privecy-policy', [FrontendController::class, 'privecyPolicy']);
 Route:: get ('/terms-conditions', [FrontendController::class, 'termsCondition']);
@@ -52,6 +52,9 @@ Route:: get ('/refund-policy', [FrontendController::class, 'refundPolicy']);
 Route:: get ('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route:: get ('/about-us', [FrontendController::class, 'aboutUs']);
 Route:: get ('/contact-us', [FrontendController::class, 'contactUs']);
+
+//product searching....
+Route:: get ('/search-products', [FrontendController::class, 'searchProduct']);
 
 //admin aurthController
 Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
