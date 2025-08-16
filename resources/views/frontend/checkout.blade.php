@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="sub-total-item grand-total">
                                          <strong>Grand Total</strong>
-                                         @if ($totalPrice >= 80000)
+                                         @if ($totalPrice >= $siteSettings->free_shipping_amount)
                                              <strong id="grandTotal">৳ {{$totalPrice+0}}</strong>
                                              <input type="hidden" name="inputGrandTotal" id="inputGrandTotal" value="{{$totalPrice+0}}">
                                              @else

@@ -19,6 +19,7 @@ class PolicySeeder extends Seeder
                 'terms_conditions' => 'By using our services,you agree to our terms and conditions designed to protect both you and us.',
                 'refund_policy' => 'Our refund policy ensures a fair and transparent process for all our customers.',
                 'payment_policy' => 'Our payment policy ensures,timely, and hassle-free transactions.',
+                'return_policy' => 'Our return policy ensures,timely, and hassle-free transactions.',
                 'about_us' => 'We are dedicated to delivering quality and trust in every service we provide',
 
             ]

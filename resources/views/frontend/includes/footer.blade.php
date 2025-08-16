@@ -87,6 +87,7 @@
                                     Contact Us
                                 </a>
                             </li>
+                          {{--
                             <li class="footer__list-item">
                                 <a href="#" class="footer__list-item-link">
                                     Blog
@@ -97,6 +98,7 @@
                                     Careers
                                 </a>
                             </li>
+                          --}}
                         </ul>
                     </div>
                 </div>
@@ -135,7 +137,7 @@
     <div class="footer__bottom-wrapper">
         <div class="container">
             <p class="footer__bottom-text">
-                © 2024, All rights reserved
+                © 2025, All rights reserved
                 <strong class="text-brand">Nitto Mart</strong>
             </p>
         </div>
