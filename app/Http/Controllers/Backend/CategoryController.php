@@ -9,10 +9,10 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+   public function __construct()
+   {
+      $this->middleware('auth');
+   }
 
    public function categoryCreate()
    {
@@ -50,8 +50,7 @@ class CategoryController extends Controller
 
       $category = category::find($id);
 
-      if ($category->image && file_exists('backend/images/category/' . $category->image))
-      {
+      if ($category->image && file_exists('backend/images/category/' . $category->image)) {
 
          unlink('backend/images/category/' . $category->image);
       }
@@ -84,7 +83,7 @@ class CategoryController extends Controller
             unlink('backend/images/category/' . $category->image);
          }
 
-       $imageName = rand() . '-category-' . '.' . $request->image->extension();
+         $imageName = rand() . '-category-' . '.' . $request->image->extension();
          $request->image->move('backend/images/category/', $imageName);
          $category->image = $imageName;
       }

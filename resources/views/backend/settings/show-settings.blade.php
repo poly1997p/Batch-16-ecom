@@ -99,7 +99,7 @@
                                     <img src="{{asset('/backend/images/settings'.$settings->logo)}}" height="60" width="150">
                                 </div>
 
-                                  <div class="input-group mb-3">
+                                <div class="input-group mb-3">
                                     <input type="file" class="form-control" value="{{$settings->hero_image}}" id="hero_image" name="hero_image"/>
                                     <label class="input-group-text" for="inputGroupFile02">Upload Slider</label>
                                     <img src="{{asset('/backend/images/settings'.$settings->hero_image)}}" height="400" width="1200">
