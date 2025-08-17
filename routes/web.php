@@ -105,3 +105,5 @@ Route::post('/admin/product/gallery-image/update/{id}', [productController::clas
 
 Route::get('/admin/general-settings', [SettingsController::class, 'showSettings']);
 Route::post('/admin/general-settings/update', [SettingsController::class, 'updateSettings']);
+Route::get('/admin/policies', [SettingsController::class, 'showPolicies']);
+Route::post('/admin/policies/update', [SettingsController::class, 'updatePolicies']);
