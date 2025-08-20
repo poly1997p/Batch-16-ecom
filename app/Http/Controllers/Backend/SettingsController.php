@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Policy;
 use App\Models\Settings;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ class SettingsController extends Controller
         }
 
         $settings->save();
-        toastr()->success('Settings updated succeesfully!');
+        toastr()->success('Settingsupdated succeesfully!');
         return redirect()->back();
     }
 
@@ -86,5 +87,36 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    
+    public function showBanners()
+    {   $banners= Banner::get();     
+        
+        return view('backend.settings.show-banners', compact('banners'));
+    }
+
+    public function editBanner($id)
+    {
+        $banner = Banner::find($id);
+      return view('backend.settings.edit-banners', compact('banner'));
+    }
+
+    public function updateBanner(Request $request, $id)
+    {
+         $banner = Banner::find($id);
+
+        if (isset($request->image)) {
+
+            if ($banner->image && file_exists('backend/images/banner/'.$banner->image)) {
+                unlink('backend/images/banner/'. $banner->image);
+            }
+
+            $imageName = rand().'-banner-'.'.'.$request->image->extension(); //12345-category-.webp
+            $request->image->move('backend/images/banner/', $imageName);
+
+            $banner->image = $imageName;
+        }
+
+        $banner->save();
+        toastr()->success('banner updated succeesfully!');
+        return redirect('admin/show-banner');
+    }
 }

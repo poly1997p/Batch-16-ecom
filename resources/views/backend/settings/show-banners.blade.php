@@ -7,12 +7,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">SubCategory List</h3>
+                    <h3 class="mb-0">Banners List</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">SubCategory List</li>
+                        <li class="breadcrumb-item active" aria-current="page">Banners List</li>
                     </ol>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Manage SubCategories</h3>
+                            <h3 class="card-title">Manage Bannerss</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -39,25 +39,22 @@
                                 <thead>
                                     <tr>
                                         <th>SL</th>
-                                        
-                                        <th>SubCategory Name</th>
-                                        <th>Category</th>
+                                        <th>Banner</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach ($subcategories  as $SubCategory)
+                                   @foreach ($banners as $banner)
                                         <tr class="align-middle">
                                         <td>{{$loop->index+1}}</td>
-                                        
-                                        <td>{{$SubCategory->name}} </td>
-                                       <td>{{$SubCategory->category->name}} </td>
-                                        
-
+                                        <td>
+                                            <img src="{{ asset('backend/images/banner/'.$banner->image) }}" height="200" width="400">
+                                        </td>
+                                         
                                         
                                         <td>
-                                            <a href="{{url('/admin/sub-category/edit/'.$SubCategory->id)}}" class="btn btn-primary">Edit</a>
-                                            <a href="{{url('/admin/sub-category/delete/'.$SubCategory->id)}}" onclick="return confirm('Are You Sure?')" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/admin/edit-banner/'.$banner->id)}}" class="btn btn-primary">Edit</a>
+                                           
                                         </td>
                                     </tr>
                                    @endforeach

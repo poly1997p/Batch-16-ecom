@@ -116,6 +116,14 @@
                                  <p>Policies $ About Us</p>
                              </a>
                          </li>
+
+                          <li class="nav-item">
+                             <a href="{{ url('/admin/show-banner') }}" class="nav-link">
+                                 <i class="nav-icon bi bi-circle"></i>
+                                 <p>Banners</p>
+                             </a>
+                         </li>
+
                         
 
                      </ul>
