@@ -94,6 +94,42 @@
                      </ul>
                  </li>
 
+                  <li class="nav-item menu-open">
+                     <a href="#" class="nav-link">
+                         <i class="nav-icon bi bi-speedometer"></i>
+                         <p>
+                             Orders
+                             <i class="nav-arrow bi bi-chevron-right"></i>
+                         </p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                         <li class="nav-item">
+                             <a href="{{ url('/admin/orders/all') }}" class="nav-link">
+                                 <i class="nav-icon bi bi-circle"></i>
+                                 <p>All Orders</p>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
+                  <li class="nav-item menu-open">
+                     <a href="#" class="nav-link">
+                         <i class="nav-icon bi bi-speedometer"></i>
+                         <p>
+                             Contact Message
+                             <i class="nav-arrow bi bi-chevron-right"></i>
+                         </p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                         <li class="nav-item">
+                             <a href="{{ url('/admin/contact-message/list') }}" class="nav-link">
+                                 <i class="nav-icon bi bi-circle"></i>
+                                 <p>List</p>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
                  <li class="nav-item menu-open">
                      <a href="#" class="nav-link">
                          <i class="nav-icon bi bi-speedometer"></i>
