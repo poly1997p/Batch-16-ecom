@@ -77,7 +77,34 @@
                                             {{$order->courier_name??"courier not selected"}}
                                             <p class="text-success">{{$order->consingment_id}}</p>
                                         </td>
-                                        <td>{{ucfirst($order->status)}}</td>
+                                        <td>
+                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate">
+                                                @csrf
+                                             <select name="status" class="form-control" onchange="statusFormSubmission">
+
+                                                <option value="pending" @if ($order->status == "pending")
+                                                    selected
+                                                @endif>Pending</option> 
+
+                                                <option value="confirmed" @if ($order->status == "confirmed")
+                                                    selected
+                                                @endif>Confirmed</option>
+                                                
+                                                <option value="delivered" @if ($order->status == "delivered")
+                                                    selected
+                                                @endif>Delivered</option>
+
+                                                <option value="cancelled" @if ($order->status == "cancelled")
+                                                    selected
+                                                @endif>Cancelled</option> 
+
+                                                <option value="returned" @if ($order->status == "returned")
+                                                    selected
+                                                @endif>Returned</option> 
+                                             </select>
+
+                                            </form>
+                                        </td>
                                         <td>
                                             <a href="#" class="btn btn-primary">Details</a>
                                             <a href="#" onclick="return confirm('Are You Sure?')"
@@ -103,3 +130,12 @@
     </div>
     <!--end::App Content-->
 @endsection
+
+<@push('script')
+    <script>
+        function statusFormSubmission()
+        {
+          document.getElementById('statusUpdate').submit();
+        }
+    </script>
+@endpush

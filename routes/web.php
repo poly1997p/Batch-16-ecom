@@ -120,3 +120,4 @@ Route::get('/admin/contact-message/delete/{id}', [SettingsController::class, 'de
 //orders...
 
 Route::get('/admin/orders/all', [OrderController::class, 'showOrders']);
+Route::get('/admin/order/status/{id}', [OrderController::class, 'updateOrderStatus']);

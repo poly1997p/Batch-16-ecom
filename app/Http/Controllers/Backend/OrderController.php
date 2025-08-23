@@ -21,4 +21,13 @@ class OrderController extends Controller
       return view('backend.order.show-orders', compact('orders'));
     }
 
+    public function updateOrderStatus(Request $request, $id)
+    {
+      $order = Order::find($id);
+      $order->status = $request->status;
+
+      $order->save();
+      return redirect()->back();
+    }
+
 }
