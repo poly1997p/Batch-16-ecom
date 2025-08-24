@@ -28,7 +28,24 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-md-12">
+                    <form action="{{ url('/admin/orders/all') }}" method="GET">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="search" id="search" required>
+                            </div>
 
+                            <div class="col-md-4">
+                              <button type="submit" class="btn btn-primary">Search</button>
+                           </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                
+
+                <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
                             <h3 class="card-title">Manage Order</h3>
@@ -53,65 +70,68 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr>
-                                        <td>{{$loop->index+1}}</td>
-                                        <td>{{$order->created_at}}</td>
-                                        <td>{{$order->invoice_number54}}</td>
-                                        <td>
-                                            @foreach ($order->orderDetails as $details)
-                                                <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
-                                                 {{$details->product->name}} x {{$details->qty}} <br>
-                                            @endforeach
-                                            
-                                        </td>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ $order->invoice_number }}</td>
+                                            <td>
+                                                @foreach ($order->orderDetails as $details)
+                                                    <img src="{{ asset('backend/images/product/' . $details->product->image) }}"
+                                                        height="100" width="100">
+                                                    {{ $details->product->name }} x {{ $details->qty }} <br>
+                                                @endforeach
 
-                                        <td>
-                                            <p style="color: red">{{$order->ip_address}}</p>
-                                            Name: {{$order->name}}
-                                            <p style="color: green"><b>Phone: {{$order->phone}}</b></p>
-                                            <strong class="text-primary">Address: {{$order->address}} </strong>
-                                        </td>
+                                            </td>
 
-                                        <td>{{$order->price}}</td>
-                                        <td>{{$order->charge}}</td>
-                                        <td>
-                                            {{$order->courier_name??"courier not selected"}}
-                                            <p class="text-success">{{$order->consingment_id}}</p>
-                                        </td>
-                                        <td>
-                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate">
-                                                @csrf
-                                             <select name="status" class="form-control" onchange="statusFormSubmission">
+                                            <td>
+                                                <p style="color: red">{{ $order->ip_address }}</p>
+                                                Name: {{ $order->name }}
+                                                <p style="color: green"><b>Phone: {{ $order->phone }}</b></p>
+                                                <strong class="text-primary">Address: {{ $order->address }} </strong>
+                                            </td>
 
-                                                <option value="pending" @if ($order->status == "pending")
-                                                    selected
-                                                @endif>Pending</option> 
+                                            <td>{{ $order->price }}</td>
+                                            <td>{{ $order->charge }}</td>
+                                            <td>
+                                                {{ $order->courier_name ?? 'courier not selected' }}
+                                                <p class="text-success">{{ $order->consingment_id }}</p>
+                                            </td>
+                                            <td>
+                                                <form action="{{ url('/admin/order/status/' . $order->id) }}" method="GET"
+                                                    id="statusUpdate{{ $order->id }}">
+                                                    @csrf
+                                                    <select name="status" class="form-control"
+                                                        onchange="statusFormSubmission({{ $order->id }})">
 
-                                                <option value="confirmed" @if ($order->status == "confirmed")
-                                                    selected
-                                                @endif>Confirmed</option>
-                                                
-                                                <option value="delivered" @if ($order->status == "delivered")
-                                                    selected
-                                                @endif>Delivered</option>
+                                                        <option value="pending"
+                                                            @if ($order->status == 'pending') selected @endif>Pending
+                                                        </option>
 
-                                                <option value="cancelled" @if ($order->status == "cancelled")
-                                                    selected
-                                                @endif>Cancelled</option> 
+                                                        <option value="confirmed"
+                                                            @if ($order->status == 'confirmed') selected @endif>Confirmed
+                                                        </option>
 
-                                                <option value="returned" @if ($order->status == "returned")
-                                                    selected
-                                                @endif>Returned</option> 
-                                             </select>
+                                                        <option value="delivered"
+                                                            @if ($order->status == 'delivered') selected @endif>Delivered
+                                                        </option>
 
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary">Details</a>
-                                            <a href="#" onclick="return confirm('Are You Sure?')"
-                                                class="btn btn-danger">Delete</a>
-                                        </td>
+                                                        <option value="cancelled"
+                                                            @if ($order->status == 'cancelled') selected @endif>Cancelled
+                                                        </option>
 
-                                    </tr>
+                                                        <option value="returned"
+                                                            @if ($order->status == 'returned') selected @endif>Returned
+                                                        </option>
+                                                    </select>
+
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                                <a href="#" onclick="return confirm('Are You Sure?')"
+                                                    class="btn btn-danger">Delete</a>
+                                            </td>
+
+                                        </tr>
                                     @endforeach
 
                                 </tbody>
@@ -131,11 +151,9 @@
     <!--end::App Content-->
 @endsection
 
-<@push('script')
-    <script>
-        function statusFormSubmission()
-        {
-          document.getElementById('statusUpdate').submit();
-        }
-    </script>
+<@push('script') <script>
+    function statusFormSubmission(id) {
+        document.getElementById('statusUpdate' + id).submit();
+    }
+</script>
 @endpush
