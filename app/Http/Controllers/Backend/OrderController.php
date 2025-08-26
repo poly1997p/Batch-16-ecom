@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +17,11 @@ class OrderController extends Controller
     public function showOrders(Request $request)
     {
       if(isset($request->search)){
-        $orders = Order::with('orderDetails')->where('phone', $request->search)->paginate(50);
+        $orders = Order::with('orderDetails')
+        ->where('phone', 'LIKE', '%'. $request->search.'%')
+        ->orWhere('invoice_number', 'LIKE', '%'. $request->search.'%')
+        ->orWhere('name', 'LIKE', '%'. $request->search.'%')
+        ->paginate(50);
       }
 
       else{
@@ -34,6 +39,27 @@ class OrderController extends Controller
 
       $order->save();
       return redirect()->back();
+    }
+
+    public function deleteOrder($id)
+    {
+      $order = Order::find($id);
+      
+      $orderDetails = OrderDetails::where('order_id', $id)->get();
+      
+      foreach($orderDetails as $details){
+
+        $details->delete();
+      }
+
+      $order->delete();
+      toastr()->success('Order deleted successfully');
+      return redirect()->back();
+    }
+
+    public function editOrder($id)
+    {
+       return view('backend.order.edit-order');
     }
 
 }

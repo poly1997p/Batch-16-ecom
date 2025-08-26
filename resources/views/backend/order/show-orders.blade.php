@@ -37,6 +37,7 @@
 
                             <div class="col-md-4">
                               <button type="submit" class="btn btn-primary">Search</button>
+                              <a href="{{url('/admin/orders/all')}}" class="btn btn-danger">Clear</a>
                            </div>
                         </div>
 
@@ -126,8 +127,8 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-primary">Details</a>
-                                                <a href="#" onclick="return confirm('Are You Sure?')"
+                                                <a href="{{url('/admin/order/edit/'.$order->id)}}" class="btn btn-primary">Details</a>
+                                                <a href="{{url('/admin/order/delete/'.$order->id)}}" onclick="return confirm('Are You Sure?')"
                                                     class="btn btn-danger">Delete</a>
                                             </td>
 
