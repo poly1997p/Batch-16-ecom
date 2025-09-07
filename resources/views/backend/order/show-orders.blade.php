@@ -95,6 +95,7 @@
                                             <td>
                                                 {{ $order->courier_name ?? 'courier not selected' }}
                                                 <p class="text-success">{{ $order->consingment_id }}</p>
+                                                <a href="{{url('/admin/orders-courier-entry/'.$order->id)}}" class="btn btn-success">Entry Courier</a>
                                             </td>
                                             <td>
                                                 <form action="{{ url('/admin/order/status/' . $order->id) }}" method="GET"

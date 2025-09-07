@@ -124,3 +124,7 @@ Route::get('/admin/order/status/{id}', [OrderController::class, 'updateOrderStat
 Route::get('/admin/order/delete/{id}', [OrderController::class, 'deleteOrder']);
 Route::get('/admin/order/edit/{id}', [OrderController::class, 'editOrder']);
 Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder']);
+
+//couriers....
+
+Route::get('/admin/orders-courier-entry/{order_id}', [OrderController::class, 'courierEntry']);
