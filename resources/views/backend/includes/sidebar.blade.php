@@ -94,7 +94,7 @@
                      </ul>
                  </li>
 
-                  <li class="nav-item menu-open">
+                 <li class="nav-item menu-open">
                      <a href="#" class="nav-link">
                          <i class="nav-icon bi bi-speedometer"></i>
                          <p>
@@ -147,7 +147,7 @@
                      </ul>
                  </li>
 
-                  <li class="nav-item menu-open">
+                 <li class="nav-item menu-open">
                      <a href="#" class="nav-link">
                          <i class="nav-icon bi bi-speedometer"></i>
                          <p>
@@ -174,13 +174,21 @@
                          </p>
                      </a>
                      <ul class="nav nav-treeview">
+
+                         <li class="nav-item">
+                             <a href="{{ url('/admin/change-credentials') }}" class="nav-link">
+                                 <i class="nav-icon bi bi-circle"></i>
+                                 <p>Change Credentials</p>
+                             </a>
+                         </li>
+
                          <li class="nav-item">
                              <a href="{{ url('/admin/general-settings') }}" class="nav-link">
                                  <i class="nav-icon bi bi-circle"></i>
                                  <p>Site Settings</p>
                              </a>
                          </li>
-                        
+
                          <li class="nav-item">
                              <a href="{{ url('/admin/policies') }}" class="nav-link">
                                  <i class="nav-icon bi bi-circle"></i>
@@ -188,14 +196,14 @@
                              </a>
                          </li>
 
-                          <li class="nav-item">
+                         <li class="nav-item">
                              <a href="{{ url('/admin/show-banner') }}" class="nav-link">
                                  <i class="nav-icon bi bi-circle"></i>
                                  <p>Banners</p>
                              </a>
                          </li>
 
-                        
+
 
                      </ul>
                  </li>

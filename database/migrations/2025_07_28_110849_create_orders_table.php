@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('courier_name')->nullable();
             $table->string('status')->default('pending')->comment('pending, confirmed, delivered, cancelled, returned');
             $table->string('tracking_code')->nullable();
-            $table->string('consingment_id')->nullable();
+            $table->string('consignment_id')->nullable();
             $table->timestamps();
         });
     }

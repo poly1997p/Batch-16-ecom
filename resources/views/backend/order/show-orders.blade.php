@@ -94,8 +94,10 @@
                                             <td>{{ $order->charge }}</td>
                                             <td>
                                                 {{ $order->courier_name ?? 'courier not selected' }}
-                                                <p class="text-success">{{ $order->consingment_id }}</p>
-                                                <a href="{{url('/admin/orders-courier-entry/'.$order->id)}}" class="btn btn-success">Entry Courier</a>
+                                                <p class="text-success">{{ $order->consignment_id }}</p>
+                                                @if ($order->courier_name != null && $order->consignment_id == null)
+                                                    <a href="{{url('/admin/orders-courier-entry/'.$order->id)}}" class="btn btn-success">Entry Courier</a>
+                                                @endif
                                             </td>
                                             <td>
                                                 <form action="{{ url('/admin/order/status/' . $order->id) }}" method="GET"

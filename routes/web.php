@@ -128,3 +128,8 @@ Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder'])
 //couriers....
 
 Route::get('/admin/orders-courier-entry/{order_id}', [OrderController::class, 'courierEntry']);
+
+//change-credentials
+
+Route::get('/admin/change-credentials', [SettingsController::class, 'showCredentials']);
+Route::post('/admin/update-credentials', [SettingsController::class, 'updateCredentials']);

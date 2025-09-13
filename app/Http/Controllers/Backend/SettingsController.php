@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\ContactMessage;
 use App\Models\Policy;
 use App\Models\Settings;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -135,5 +136,23 @@ class SettingsController extends Controller
 
        toastr()->success('deleted succeesfully!');
        return redirect()->back();
+    }
+
+    public function showCredentials(){
+        $user = User::select('name','email')->first();
+        
+        return view('backend.settings.show-credentials', compact('user'));
+    }
+
+    public function updateCredentials(Request $request){
+        $user = User::first();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        toastr()->success('Credentials updated successfully');
+        return redirect()->back();
     }
 }
