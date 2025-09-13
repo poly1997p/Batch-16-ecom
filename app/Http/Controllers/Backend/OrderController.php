@@ -139,4 +139,10 @@ class OrderController extends Controller
     toastr()->success("Courier entry is successfull");
     return redirect()->back();
   }
+//invoice..
+  public function printInvoice($order_id){
+    $order= Order::with('orderDetails')->where('id', $order_id)->first();
+   
+    return view('backend.order.invoice', compact('order'));
+  }
 }
