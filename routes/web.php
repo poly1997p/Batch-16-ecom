@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\productController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,11 +61,11 @@ Route:: post ('/contact-message/store', [FrontendController::class, 'contactMess
 Route:: get ('/search-products', [FrontendController::class, 'searchProduct']);
 
 //admin aurthController
-Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
+Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
 
 Route::get('/admin/logout', [AdminAuthController::class, 'logoutAdmin']);
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/admin/dashboard', [AdminController::class, 'adminDsahboard']);
 
@@ -136,3 +137,4 @@ Route::post('/admin/update-credentials', [SettingsController::class, 'updateCred
 
 //Invoice-print...
 Route::get('/admin/print-invoice/{order_id}', [OrderController::class, 'printInvoice']);
+Route::post('/admin/bulk-print-invoice', [OrderController::class, 'printBulkInvoice']);
