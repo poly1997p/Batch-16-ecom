@@ -90,6 +90,10 @@ class OrderController extends Controller
     return redirect()->back();
   }
 
+  public function updateOrderDetails($id){
+
+  }
+
   //courier...
 
   public function courierEntry($order_id)
