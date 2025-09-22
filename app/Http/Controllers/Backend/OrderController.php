@@ -90,8 +90,16 @@ class OrderController extends Controller
     return redirect()->back();
   }
 
-  public function updateOrderDetails($id){
+  public function updateOrderDetails(Request $request, $id)
+  {
+    $details = OrderDetails::find($id);
 
+        $details->qty = $request->qty;
+        $details->color = $request->color;
+        $details->size = $request->size;
+
+        $details->save();
+        return response()->json('Updated Successfully');
   }
 
   //courier...
